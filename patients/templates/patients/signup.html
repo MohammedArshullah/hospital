@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Signup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Reset & Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #4A90E2, #50C9CE);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Background Animation */
+    .bg-bubbles {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .bg-bubbles li {
+      position: absolute;
+      list-style: none;
+      display: block;
+      width: 40px; height: 40px;
+      background-color: rgba(255, 255, 255, 0.15);
+      bottom: -160px;
+      animation: square 25s infinite linear;
+      border-radius: 5px;
+    }
+
+    .bg-bubbles li:nth-child(1) { left: 10%; width: 80px; height: 80px; animation-delay: 0s; }
+    .bg-bubbles li:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 17s; }
+    .bg-bubbles li:nth-child(3) { left: 25%; animation-delay: 4s; }
+    .bg-bubbles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 22s; }
+    .bg-bubbles li:nth-child(5) { left: 70%; }
+    .bg-bubbles li:nth-child(6) { left: 80%; width: 120px; height: 120px; animation-delay: 3s; }
+    .bg-bubbles li:nth-child(7) { left: 32%; width: 160px; height: 160px; animation-delay: 7s; }
+    .bg-bubbles li:nth-child(8) { left: 55%; width: 20px; height: 20px; animation-delay: 15s; animation-duration: 40s; }
+    .bg-bubbles li:nth-child(9) { left: 25%; width: 10px; height: 10px; animation-delay: 2s; animation-duration: 40s; }
+    .bg-bubbles li:nth-child(10) { left: 90%; width: 160px; height: 160px; animation-delay: 11s; }
+
+    @keyframes square {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+    }
+
+    /* Container */
+    .signup-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      width: 95%;
+      max-width: 600px;
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+      transition: all 0.5s ease;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .signup-container:hover {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      transform: translateY(-5px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #4A90E2, #50C9CE);
+      border-radius: 50%;
+      color: white;
+      font-size: 36px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #004a99;
+      margin-bottom: 25px;
+      font-size: 28px;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, #50C9CE, #004a99);
+      border-radius: 3px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    form p {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+    }
+
+    form p label {
+      font-weight: 600;
+      color: #004a99;
+      margin-bottom: 5px;
+    }
+
+    form p input,
+    form p select,
+    form p textarea {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 2px solid #e0e0e0;
+      background: #f9f9f9;
+      transition: 0.3s;
+    }
+
+    form p input:focus,
+    form p select:focus,
+    form p textarea:focus {
+      border-color: #50C9CE;
+      background-color: #fff;
+      box-shadow: 0 0 0 3px rgba(80, 201, 206, 0.2);
+      outline: none;
+    }
+
+    button {
+      padding: 15px;
+      background: linear-gradient(to right, #004a99, #50C9CE);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 74, 153, 0.3);
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 74, 153, 0.4);
+    }
+
+    .messages {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .alert {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-weight: 600;
+      font-size: 14px;
+      animation: slideDown 0.5s ease-out;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border-left: 4px solid #28a745;
+    }
+
+    .alert-error,
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      border-left: 4px solid #dc3545;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .signup-container {
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .logo {
+        width: 70px;
+        height: 70px;
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Animated Background -->
+<ul class="bg-bubbles">
+  <li></li><li></li><li></li><li></li><li></li>
+  <li></li><li></li><li></li><li></li><li></li>
+</ul>
+
+<!-- Signup Form -->
+<div class="signup-container">
+  <div class="logo">
+    <i class="fas fa-user-plus"></i>
+  </div>
+  <h2>Patient Registration</h2>
+
+  <div class="messages">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ patient_form.as_p }}
+    <button type="submit">Create Account</button>
+  </form>
+</div>
+
+</body>
+</html>

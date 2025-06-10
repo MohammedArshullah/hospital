@@ -1,0 +1,100 @@
+{% extends 'patients/base.html' %}
+{% load static %}
+
+{% block title %}Home - Quick Care Hospital{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section with Overlay -->
+<section style="
+    background-image: url('{% static 'patients/hospital_img.jpg' %}');
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+    position: relative;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+">
+    <div style="
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 40px;
+        border-radius: 10px;
+    ">
+        <h1 style="font-size: 3rem; margin-bottom: 10px;">Welcome to Quick Care Hospital</h1>
+        <p style="font-size: 1.5rem;">Caring for Life. Your Health, Our Priority.</p>
+        <a href="{% url 'doctor_list' %}" style="
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #ffc107;
+            color: black;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+        ">Find a Doctor</a>
+    </div>
+</section>
+
+<!-- Services / Features Section -->
+<section style="padding: 60px 20px; text-align: center; background-color: #f8f9fa;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 30px;">Our Services</h2>
+    <div style="
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    ">
+        <div style="
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="{% static 'patients/appointment.png' %}" alt="Appointment" style="width: 60px;">
+            <h3>Book Appointment</h3>
+            <p>Schedule your visit with a few clicks.</p>
+        </div>
+
+        <div style="
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="{% static 'patients/doctor.jpg' %}" alt="Doctors" style="width: 60px;">
+            <h3>Our Doctors</h3>
+            <p>Meet expert specialists for your care.</p>
+        </div>
+
+        <div style="
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="{% static 'patients/dashboard.png' %}" alt="Dashboard" style="width: 60px;">
+            <h3>Patient Dashboard</h3>
+            <p>Track appointments and medical history.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact-section" style="padding: 60px 20px; background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: white; color: white; text-align: center;">
+    <h2 style="font-size: 2.2rem;">Contact Us</h2>
+    <p style="font-size: 1.1rem;">📧 Email: hospital@example.com</p>
+    <p style="font-size: 1.1rem;">📞 Phone: +91 9876543210</p>
+    <p style="font-size: 1.1rem;">📍 Address: Trichy, Tamil Nadu</p>
+</section>
+
+{% endblock %}

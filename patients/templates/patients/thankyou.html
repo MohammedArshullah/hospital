@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .thankyou-container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      max-width: 450px;
+      width: 90%;
+    }
+
+    h2 {
+      color: #28a745;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .emoji {
+      font-size: 3rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 25px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="thankyou-container">
+    <div class="emoji">🙏</div>
+    <h2>Thanks for your feedback!</h2>
+    <p>Your input helps us improve our services.</p>
+    <a href="{% url 'patient_dashboard' %}" class="back-btn">Back to Dashboard</a>
+  </div>
+
+</body>
+</html>

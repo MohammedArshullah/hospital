@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Appointments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f4f9fc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #007BFF;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .appointment-card {
+      background: #fff;
+      padding: 20px 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .appointment-card:hover {
+      transform: scale(1.02);
+    }
+
+    .appointment-header {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .appointment-detail {
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-buttons form,
+    .action-buttons a {
+      display: inline-block;
+    }
+
+    .action-buttons button,
+    .action-buttons a {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .action-buttons button:hover,
+    .action-buttons a:hover {
+      background-color: #0056b3;
+    }
+
+    .no-appointments {
+      text-align: center;
+      padding: 40px;
+      background-color: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+
+      .appointment-card {
+        padding: 15px;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>🗓️ My Appointments</h2>
+
+    {% if appointments %}
+      {% for appointment in appointments %}
+        <div class="appointment-card">
+          <div class="appointment-header">
+            With Dr. {{ appointment.doctor.name }}
+          </div>
+          <div class="appointment-detail">
+            <strong>Date:</strong> {{ appointment.date }}<br>
+            <strong>Time:</strong> {{ appointment.time }}<br>
+            <strong>Description:</strong> {{ appointment.description|default:"(No notes)" }}
+          </div>
+
+          <div class="action-buttons">
+            <!-- Cancel Form -->
+            <form method="POST" action="{% url 'cancel_appointment' appointment.id %}">
+              {% csrf_token %}
+              <button type="submit" onclick="return confirm('Are you sure you want to cancel this appointment?')">
+                ❌ Cancel
+              </button>
+            </form>
+
+            <!-- Reschedule Link -->
+            <a href="{% url 'reschedule_appointment' appointment.id %}">🔄 Reschedule</a>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="no-appointments">
+        😕 You have no appointments booked.
+      </div>
+    {% endif %}
+  </div>
+
+  <div style="text-align: center; margin: 40px 0;">
+    <a href="{% url 'patient_dashboard' %}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+      🏠 Back to Dashboard
+    </a>
+  </div>
+
+</body>
+</html>

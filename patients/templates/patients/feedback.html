@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Submit Feedback</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #dbeafe, #e0f7fa);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .feedback-container {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 50px 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      animation: slideIn 0.6s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h2 {
+      color: #007BFF;
+      margin-bottom: 25px;
+      font-weight: 800;
+      font-size: 26px;
+    }
+
+    textarea {
+      width: 90%;
+      height: 160px;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: 1.5px solid #cce0e8;
+      resize: none;
+      transition: border-color 0.3s ease;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    textarea:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 32px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      background-color: #1e7e34;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .feedback-container {
+        padding: 35px 20px;
+      }
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="feedback-container">
+    <div class="icon">💬</div>
+    <h2>We Value Your Feedback</h2>
+
+    <form method="POST" action="{% url 'submit_feedback' %}">
+      {% csrf_token %}
+      <textarea name="message" placeholder="Share your experience or suggestions..." required></textarea>
+      <br>
+      <button type="submit">Send Feedback</button>
+    </form>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+{% now "Y-m-d" as today %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Appointment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .appointment-container {
+      background: #ffffff;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #007BFF;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    form {
+      text-align: left;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    input[type="date"],
+    input[type="time"],
+    textarea {
+      width: 100%;
+      padding: 10px 15px;
+      font-size: 15px;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #007BFF;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+      transform: scale(1.02);
+    }
+
+    .existing-appointments {
+      margin-top: 30px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .existing-appointments h3 {
+      margin-bottom: 10px;
+      color: #ff5733;
+    }
+
+    .appointment-time {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .no-appointments {
+      color: #28a745;
+    }
+
+    @media (max-width: 600px) {
+      .appointment-container {
+        padding: 25px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="appointment-container">
+    <h2>🩺 Book Appointment with Dr. {{ doctor.name }}</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <label for="date">Select Date:</label>
+      <input type="date" name="date" id="date" required min="{{ today }}">
+
+      <label for="time">Select Time:</label>
+      <input type="time" name="time" id="time" step="1800" required>
+      <small>Appointments are in 30-minute slots. Avoid busy times below.</small>
+
+      <label for="description">Description (Optional):</label>
+      <textarea name="description" id="description" placeholder="Briefly describe your concern..."></textarea>
+
+      <button type="submit">✅ Book Appointment</button>
+    </form>
+
+    <div class="existing-appointments" id="busy-times">
+      <h3>Busy Times Will Appear Here</h3>
+    </div>
+  </div>
+
+  <script>
+    const dateInput = document.getElementById('date');
+    const busyTimesDiv = document.getElementById('busy-times');
+    const doctorId = "{{ doctor.id }}";
+
+    function updateBusyTimes(date) {
+      if (!date) return;
+
+      fetch(`/get-busy-times/${doctorId}/?date=${date}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.busy_times && data.busy_times.length > 0) {
+            busyTimesDiv.innerHTML = `
+              <h3>⏳ Doctor is already booked at:</h3>
+              ${data.busy_times.map(time => `<div class="appointment-time">• ${time}</div>`).join('')}
+            `;
+          } else {
+            busyTimesDiv.innerHTML = `<h3 class="no-appointments">✅ No busy times on ${date}</h3>`;
+          }
+        })
+        .catch(err => {
+          console.error('Error fetching busy times:', err);
+          busyTimesDiv.innerHTML = `<h3 style="color:red;">Error loading busy times.</h3>`;
+        });
+    }
+
+    if (dateInput.value) {
+      updateBusyTimes(dateInput.value);
+    }
+
+    dateInput.addEventListener('change', function () {
+      updateBusyTimes(this.value);
+    });
+  </script>
+
+</body>
+</html>
