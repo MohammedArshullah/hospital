@@ -4,329 +4,143 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Appointment Confirmation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #0066cc;
-      --primary-light: #e6f2ff;
-      --secondary: #00b4db;
-      --accent: #ff6b6b;
-      --text: #333;
-      --text-light: #666;
-      --text-lighter: #999;
-      --white: #ffffff;
-      --gray: #f5f7fa;
-      --border-radius: 16px;
-      --box-shadow: 0 10px 30px rgba(0, 107, 203, 0.15);
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
-      padding: 40px 0;
+      padding: 30px 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #f0f8ff, #e6f7ff);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
+      background: linear-gradient(135deg, #dfefff, #ffffff);
+      color: #333;
     }
 
     .container {
-      max-width: 680px;
-      background: var(--white);
+      max-width: 650px;
+      background: white;
       margin: auto;
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      padding: 50px 45px;
-      position: relative;
-      overflow: hidden;
-      animation: fadeIn 0.6s ease-out;
-    }
-
-    .container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 8px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      padding: 45px 35px;
     }
 
     /* Header */
     .header {
       text-align: center;
-      margin-bottom: 30px;
-      position: relative;
+      margin-bottom: 25px;
     }
     .header img {
-      width: 90px;
-      margin-bottom: 15px;
-      filter: drop-shadow(0 4px 8px rgba(0, 107, 203, 0.2));
-      transition: var(--transition);
-    }
-    .header img:hover {
-      transform: scale(1.05);
+      width: 85px;
+      margin-bottom: 10px;
     }
     .header h1 {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(to right, #00b4db, #0083b0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-size: 32px;
-      margin: 0 0 8px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
+      font-size: 28px;
+      margin: 0;
     }
     .header p {
       font-size: 16px;
-      color: var(--text-light);
-      margin: 0;
-      font-weight: 400;
+      color: #777;
     }
 
     /* Greeting */
     .greeting p {
       font-size: 18px;
       margin-bottom: 25px;
-      color: var(--text);
-    }
-    .greeting strong {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    /* Message */
-    .message {
-      font-size: 16px;
-      line-height: 1.7;
-      margin-bottom: 30px;
-      color: var(--text);
-    }
-    .message strong {
-      color: var(--primary);
-      font-weight: 600;
     }
 
     /* Appointment Card */
     .appointment-card {
-      background: var(--primary-light);
-      border-left: 6px solid var(--primary);
-      padding: 25px;
+      background: #eef5ff;
+      border-left: 6px solid #007bff;
+      padding: 20px 25px;
       border-radius: 12px;
-      margin-bottom: 35px;
-      transition: var(--transition);
-    }
-    .appointment-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 107, 203, 0.1);
+      margin-bottom: 30px;
     }
     .appointment-item {
       display: flex;
       align-items: center;
-      margin-bottom: 18px;
-    }
-    .appointment-item:last-child {
-      margin-bottom: 0;
+      margin-bottom: 16px;
     }
     .appointment-icon {
-      font-size: 24px;
-      margin-right: 15px;
-      color: var(--primary);
-      min-width: 30px;
-      text-align: center;
+      font-size: 22px;
+      margin-right: 12px;
+      color: #007bff;
     }
     .appointment-label {
       font-weight: 600;
-      color: var(--primary);
+      color: #007bff;
       min-width: 100px;
-      font-size: 15px;
     }
     .appointment-value {
-      color: var(--text);
+      color: #333;
       font-weight: 500;
-      font-size: 16px;
     }
 
     /* Tips Section */
     .tips {
-      background: linear-gradient(to right, rgba(0, 180, 219, 0.05), rgba(0, 131, 176, 0.05));
+      background: #f0faff;
       border-radius: 10px;
-      padding: 25px;
-      margin-bottom: 35px;
-      border: 1px solid rgba(0, 180, 219, 0.15);
+      padding: 20px;
+      margin-bottom: 30px;
     }
     .tips h3 {
-      color: var(--primary);
+      color: #007bff;
       margin-top: 0;
-      margin-bottom: 15px;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-    }
-    .tips h3::before {
-      content: '💡';
-      margin-right: 10px;
-      font-size: 20px;
     }
     .tips ul {
-      padding-left: 5px;
-      list-style-type: none;
+      padding-left: 20px;
     }
     .tips li {
-      margin-bottom: 12px;
-      position: relative;
-      padding-left: 30px;
-      color: var(--text);
-    }
-    .tips li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-      font-weight: bold;
+      margin-bottom: 10px;
     }
 
     /* Contact Section */
     .contact-info {
       text-align: center;
-      margin: 35px 0;
-    }
-    .contact-info p {
-      font-size: 16px;
-      color: var(--text);
-      margin-bottom: 20px;
-    }
-    .contact-info strong {
-      color: var(--primary);
-      font-weight: 600;
     }
     .cta-button {
       display: inline-block;
-      margin-top: 10px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      margin-top: 15px;
+      background: #007bff;
       color: white;
-      padding: 14px 32px;
+      padding: 12px 28px;
       border: none;
-      border-radius: 50px;
+      border-radius: 8px;
       text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-      box-shadow: 0 4px 15px rgba(0, 107, 203, 0.3);
-      position: relative;
-      overflow: hidden;
+      font-weight: bold;
+      transition: background 0.3s ease;
     }
     .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 107, 203, 0.4);
-    }
-    .cta-button:active {
-      transform: translateY(0);
-    }
-    .cta-button::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0));
-      opacity: 0;
-      transition: var(--transition);
-    }
-    .cta-button:hover::after {
-      opacity: 1;
+      background: #005ecb;
     }
 
     /* Footer */
     .footer {
-      margin-top: 50px;
-      font-size: 14px;
-      color: var(--text-lighter);
+      margin-top: 40px;
+      font-size: 13px;
+      color: #999;
       text-align: center;
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
-      padding-top: 20px;
-    }
-    .footer p {
-      margin: 8px 0;
-    }
-    .footer strong {
-      color: var(--primary);
-      font-weight: 600;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
     }
 
-    .social-icons {
-      margin: 20px 0;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
     .social-icons a {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--gray);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
+      margin: 0 6px;
+      display: inline-block;
     }
-    .social-icons a:hover {
-      background: var(--primary-light);
-      transform: translateY(-3px);
-    }
+
     .social-icons img {
-      width: 18px;
-      height: 18px;
-      transition: var(--transition);
+      width: 24px;
+      transition: transform 0.3s ease;
     }
-
-    /* Confetti Effect */
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: var(--accent);
-      opacity: 0;
-      animation: confetti 5s ease-in-out infinite;
-    }
-
-    @keyframes confetti {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(500px) rotate(720deg); opacity: 0; }
+    .social-icons img:hover {
+      transform: scale(1.2);
     }
 
     /* Responsive */
-    @media screen and (max-width: 768px) {
-      .container {
-        padding: 40px 25px;
-        margin: 0 15px;
-      }
-      .header h1 {
-        font-size: 28px;
-      }
-    }
-
-    @media screen and (max-width: 480px) {
-      body {
-        padding: 20px 0;
-      }
-      .container {
-        padding: 30px 20px;
-        border-radius: 12px;
-      }
-      .header h1 {
-        font-size: 24px;
-      }
+    @media screen and (max-width: 600px) {
       .appointment-item {
         flex-direction: column;
         align-items: flex-start;
@@ -334,19 +148,10 @@
       .appointment-label {
         margin-bottom: 5px;
       }
-      .appointment-icon {
-        margin-right: 0;
-        margin-bottom: 8px;
-      }
-      .cta-button {
-        padding: 12px 24px;
-        font-size: 14px;
-      }
     }
   </style>
 </head>
 <body>
-  <!-- Confetti elements would be added here with JavaScript -->
   <div class="container">
     <!-- Header -->
     <div class="header">
@@ -361,7 +166,7 @@
     </div>
 
     <!-- Message -->
-    <p class="message">
+    <p style="font-size: 16px; line-height: 1.6;">
       Thank you for choosing <strong>{{ hospital_name }}</strong>. We're happy to confirm your appointment. Please review your appointment details and preparation tips below.
     </p>
 
@@ -413,24 +218,5 @@
       </div>
     </div>
   </div>
-
-  <script>
-    // Simple confetti effect
-    document.addEventListener('DOMContentLoaded', function() {
-      const container = document.querySelector('.container');
-      const colors = ['#0066cc', '#00b4db', '#ff6b6b', '#6bceff', '#a5d8ff'];
-      
-      for (let i = 0; i < 30; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = Math.random() * 5 + 's';
-        confetti.style.width = Math.random() * 8 + 5 + 'px';
-        confetti.style.height = confetti.style.width;
-        container.appendChild(confetti);
-      }
-    });
-  </script>
 </body>
 </html>
